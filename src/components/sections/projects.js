@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useStaticQuery, graphql } from 'gatsby';
+import { useStaticQuery, graphql } from 'gatsby';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styled from 'styled-components';
 import { srConfig } from '@config';
@@ -29,11 +29,17 @@ const StyledProjectsSection = styled.section`
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-gap: 15px;
-    position: relative;
     margin-top: 50px;
 
-    @media (max-width: 1080px) {
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    /* Better responsive grid */
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      grid-gap: 20px;
+    }
+
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr; /* Single column on very small screens */
+      grid-gap: 16px;
     }
   }
 
@@ -70,6 +76,13 @@ const StyledProject = styled.li`
     position: relative;
     height: 100%;
     padding: 2rem 1.75rem;
+    .project-inner {
+      padding: 2rem 1.75rem;
+
+      @media (max-width: 480px) {
+        padding: 1.5rem 1.25rem;
+      }
+    }
     border-radius: var(--border-radius);
     background-color: var(--light-navy);
     transition: var(--transition);
@@ -118,6 +131,9 @@ const StyledProject = styled.li`
     margin: 0 0 10px;
     color: var(--lightest-slate);
     font-size: var(--fz-xxl);
+    @media (max-width: 480px) {
+      font-size: var(--fz-xl); /* or clamp(1.25rem, 5vw, 1.75rem) */
+    }
 
     a {
       position: static;
@@ -138,6 +154,10 @@ const StyledProject = styled.li`
   .project-description {
     color: var(--light-slate);
     font-size: 17px;
+    @media (max-width: 480px) {
+      font-size: 15px;
+      line-height: 1.5;
+    }
 
     a {
       ${({ theme }) => theme.mixins.inlineLink};
@@ -241,11 +261,7 @@ const Projects = () => {
             </div>
           </div>
 
-          <h3 className="project-title">
-            <a href={external} target="_blank" rel="noreferrer">
-              {title}
-            </a>
-          </h3>
+          <h3 className="project-title">{title}</h3>
 
           <div className="project-description" dangerouslySetInnerHTML={{ __html: html }} />
         </header>
@@ -266,10 +282,6 @@ const Projects = () => {
   return (
     <StyledProjectsSection>
       <h2 ref={revealTitle}>Other Noteworthy Projects</h2>
-
-      <Link className="inline-link archive-link" to="/archive" ref={revealArchiveLink}>
-        view the archive
-      </Link>
 
       <ul className="projects-grid">
         {prefersReducedMotion ? (

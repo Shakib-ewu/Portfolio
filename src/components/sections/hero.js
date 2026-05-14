@@ -28,11 +28,15 @@ const StyledHeroSection = styled.section`
       margin: 0 0 20px 2px;
     }
   }
+  h2.big-heading {
+    font-size: 70px; /* Large name */
+  }
 
   h3 {
     margin-top: 5px;
-    color: var(--slate);
+    color: var(--);
     line-height: 0.9;
+    font-size: 32px;
   }
 
   p {
@@ -60,32 +64,17 @@ const Hero = () => {
   }, []);
 
   const one = <h1>Hi, my name is</h1>;
-  const two = <h2 className="big-heading">Brittany Chiang.</h2>;
-  const three = <h3 className="big-heading">I build things for the web.</h3>;
-  const four = (
-    <>
-      <p>
-        I’m a software engineer specializing in building (and occasionally designing) exceptional
-        digital experiences. Currently, I’m focused on building accessible, human-centered products
-        at{' '}
-        <a href="https://upstatement.com/" target="_blank" rel="noreferrer">
-          Upstatement
-        </a>
-        .
-      </p>
-    </>
-  );
-  const five = (
-    <a
-      className="email-link"
-      href="https://www.newline.co/courses/build-a-spotify-connected-app"
-      target="_blank"
-      rel="noreferrer">
-      Check out my course!
-    </a>
+  const two = <h2 className="big-heading">Sakib Sarkar</h2>;
+  const three = (
+    <h3 className="big-heading">
+      SQA Engineer @{' '}
+      <a href="https://www.bevycommerce.com/" target="_blank" rel="noopener noreferrer">
+        Bevy Commerce
+      </a>
+    </h3>
   );
 
-  const items = [one, two, three, four, five];
+  const items = [one, two, three];
 
   return (
     <StyledHeroSection>

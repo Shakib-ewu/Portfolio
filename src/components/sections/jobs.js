@@ -17,7 +17,6 @@ const StyledJobsSection = styled.section`
       display: block;
     }
 
-    // Prevent container from jumping
     @media (min-width: 700px) {
       min-height: 340px;
     }
@@ -35,32 +34,27 @@ const StyledTabList = styled.div`
   @media (max-width: 600px) {
     display: flex;
     overflow-x: auto;
-    width: calc(100% + 100px);
-    padding-left: 50px;
-    margin-left: -50px;
-    margin-bottom: 30px;
-  }
-  @media (max-width: 480px) {
-    width: calc(100% + 50px);
-    padding-left: 25px;
-    margin-left: -25px;
+    width: 100%;
+    padding: 0 0 8px 0;
+    margin: 0 0 24px 0;
+    gap: 8px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   li {
     &:first-of-type {
       @media (max-width: 600px) {
-        margin-left: 50px;
-      }
-      @media (max-width: 480px) {
-        margin-left: 25px;
+        margin-left: 0;
       }
     }
     &:last-of-type {
       @media (max-width: 600px) {
-        padding-right: 50px;
-      }
-      @media (max-width: 480px) {
-        padding-right: 25px;
+        padding-right: 0;
       }
     }
   }
@@ -80,22 +74,32 @@ const StyledTabButton = styled.button`
   font-size: var(--fz-xs);
   text-align: left;
   white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease;
 
   @media (max-width: 768px) {
     padding: 0 15px 2px;
   }
+
   @media (max-width: 600px) {
     ${({ theme }) => theme.mixins.flexCenter};
-    min-width: 120px;
-    padding: 0 15px;
+    min-width: unset;
+    padding: 8px 16px;
     border-left: 0;
-    border-bottom: 2px solid var(--lightest-navy);
+    border-bottom: 0;
+    border-radius: 20px;
+    background-color: ${({ isActive }) => (isActive ? 'var(--green)' : 'var(--light-navy)')};
+    color: ${({ isActive }) => (isActive ? 'var(--navy)' : 'var(--slate)')};
+    font-weight: ${({ isActive }) => (isActive ? '600' : '400')};
     text-align: center;
   }
 
   &:hover,
   &:focus {
     background-color: var(--light-navy);
+
+    @media (max-width: 600px) {
+      background-color: ${({ isActive }) => (isActive ? 'var(--green)' : 'var(--lightest-navy)')};
+    }
   }
 `;
 
@@ -113,16 +117,7 @@ const StyledHighlight = styled.div`
   transition-delay: 0.1s;
 
   @media (max-width: 600px) {
-    top: auto;
-    bottom: 0;
-    width: 100%;
-    max-width: var(--tab-width);
-    height: 2px;
-    margin-left: 50px;
-    transform: translateX(calc(${({ activeTabId }) => activeTabId} * var(--tab-width)));
-  }
-  @media (max-width: 480px) {
-    margin-left: 25px;
+    display: none;
   }
 `;
 
@@ -141,6 +136,13 @@ const StyledTabPanel = styled.div`
   height: auto;
   padding: 10px 5px;
 
+  @media (max-width: 600px) {
+    padding: 20px;
+    background-color: var(--light-navy);
+    border-radius: 8px;
+    border: 1px solid var(--lightest-navy);
+  }
+
   ul {
     ${({ theme }) => theme.mixins.fancyList};
   }
@@ -150,6 +152,14 @@ const StyledTabPanel = styled.div`
     font-size: var(--fz-xxl);
     font-weight: 500;
     line-height: 1.3;
+
+    @media (max-width: 600px) {
+      font-size: var(--fz-xl);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 4px;
+    }
 
     .company {
       color: var(--green);
@@ -161,6 +171,10 @@ const StyledTabPanel = styled.div`
     color: var(--light-slate);
     font-family: var(--font-mono);
     font-size: var(--fz-xs);
+
+    @media (max-width: 600px) {
+      margin-bottom: 16px;
+    }
   }
 `;
 
@@ -199,7 +213,6 @@ const Jobs = () => {
     if (prefersReducedMotion) {
       return;
     }
-
     sr.reveal(revealContainer.current, srConfig());
   }, []);
 
@@ -208,20 +221,16 @@ const Jobs = () => {
       tabs.current[tabFocus].focus();
       return;
     }
-    // If we're at the end, go to the start
     if (tabFocus >= tabs.current.length) {
       setTabFocus(0);
     }
-    // If we're at the start, move to the end
     if (tabFocus < 0) {
       setTabFocus(tabs.current.length - 1);
     }
   };
 
-  // Only re-run the effect if tabFocus changes
   useEffect(() => focusTab(), [tabFocus]);
 
-  // Focus on tabs when using up & down arrow keys
   const onKeyDown = e => {
     switch (e.key) {
       case KEY_CODES.ARROW_UP: {
@@ -229,13 +238,11 @@ const Jobs = () => {
         setTabFocus(tabFocus - 1);
         break;
       }
-
       case KEY_CODES.ARROW_DOWN: {
         e.preventDefault();
         setTabFocus(tabFocus + 1);
         break;
       }
-
       default: {
         break;
       }
@@ -244,7 +251,7 @@ const Jobs = () => {
 
   return (
     <StyledJobsSection id="jobs" ref={revealContainer}>
-      <h2 className="numbered-heading">Where I’ve Worked</h2>
+      <h2 className="numbered-heading">Where I've Worked</h2>
 
       <div className="inner">
         <StyledTabList role="tablist" aria-label="Job tabs" onKeyDown={e => onKeyDown(e)}>

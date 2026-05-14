@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import styled from 'styled-components';
 import { Icon } from '@components/icons';
 import { socialMedia } from '@config';
@@ -11,6 +10,49 @@ const StyledFooter = styled.footer`
   min-height: 70px;
   padding: 15px;
   text-align: center;
+`;
+
+const StyledScrollToTop = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+  margin: 0 auto 25px;
+  border: 2px solid var(--green);
+  border-radius: 12px;
+  background-color: transparent;
+  color: var(--green);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  outline: none;
+
+  &:hover,
+  &:focus {
+    background-color: rgba(100, 255, 218, 0.1);
+    transform: translateY(-3px);
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  @media (max-width: 768px) {
+    width: 45px;
+    height: 45px;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
 `;
 
 const StyledSocialLinks = styled.div`
@@ -45,52 +87,33 @@ const StyledCredit = styled.div`
   font-family: var(--font-mono);
   font-size: var(--fz-xxs);
   line-height: 1;
-
-  a {
-    padding: 10px;
-  }
-
-  .github-stats {
-    margin-top: 10px;
-
-    & > span {
-      display: inline-flex;
-      align-items: center;
-      margin: 0 7px;
-    }
-    svg {
-      display: inline-block;
-      margin-right: 5px;
-      width: 14px;
-      height: 14px;
-    }
   }
 `;
 
 const Footer = () => {
-  const [githubInfo, setGitHubInfo] = useState({
-    stars: null,
-    forks: null,
-  });
-
-  useEffect(() => {
-    if (process.env.NODE_ENV !== 'production') {
-      return;
-    }
-    fetch('https://api.github.com/repos/bchiang7/v4')
-      .then(response => response.json())
-      .then(json => {
-        const { stargazers_count, forks_count } = json;
-        setGitHubInfo({
-          stars: stargazers_count,
-          forks: forks_count,
-        });
-      })
-      .catch(e => console.error(e));
-  }, []);
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
 
   return (
     <StyledFooter>
+      <StyledScrollToTop onClick={scrollToTop} aria-label="Scroll to top">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round">
+          <title>Scroll to Top</title>
+          <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+      </StyledScrollToTop>
+
       <StyledSocialLinks>
         <ul>
           {socialMedia &&
@@ -104,30 +127,15 @@ const Footer = () => {
         </ul>
       </StyledSocialLinks>
 
-      <StyledCredit tabindex="-1">
-        <a href="https://github.com/bchiang7/v4">
-          <div>Designed &amp; Built by Brittany Chiang</div>
-
-          {githubInfo.stars && githubInfo.forks && (
-            <div className="github-stats">
-              <span>
-                <Icon name="Star" />
-                <span>{githubInfo.stars.toLocaleString()}</span>
-              </span>
-              <span>
-                <Icon name="Fork" />
-                <span>{githubInfo.forks.toLocaleString()}</span>
-              </span>
-            </div>
-          )}
-        </a>
+      <StyledCredit tabIndex="-1">
+        Originally built by{' '}
+        <a href="https://brittanychiang.com/" target="_blank" rel="noreferrer">
+          Brittany Chiang
+        </a>{' '}
+        &amp; Redesigned by Sakib Sarkar
       </StyledCredit>
     </StyledFooter>
   );
-};
-
-Footer.propTypes = {
-  githubInfo: PropTypes.object,
 };
 
 export default Footer;

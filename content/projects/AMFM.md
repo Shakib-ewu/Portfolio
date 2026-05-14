@@ -1,14 +1,11 @@
 ---
 date: '2017-11-01'
-title: 'Apple Music Facebook Messenger Integration'
-github: ''
-external: 'https://www.theverge.com/2017/10/5/16433770/facebook-messenger-apple-music-bot-song-streaming'
+title: 'Machine Learning-Based Risk Assessment for Suicide Prevention'
+github: 'https://github.com/Shakib-ewu/Suicide-Attempt-Prediction'
 tech:
-  - Ember
-  - JS
-  - SCSS
-company: 'Apple'
+  - Python
+  - Jupyter Notebook
 showInProjects: true
 ---
 
-Facebook Messenger chat bot extension featuring authentication and full song streaming from within the Messenger app. Read more about it on [The Verge](https://www.theverge.com/2017/10/5/16433770/facebook-messenger-apple-music-bot-song-streaming).
+This project is a machine learning study focused on predicting suicidal behavior based on a variety of demographic, social, and psychological factors. It appears to be part of a thesis (based on the file path in your code) aimed at identifying high-risk individuals through computational modeling.

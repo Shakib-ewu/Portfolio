@@ -1,14 +1,12 @@
 ---
 date: '2017-12-01'
-title: 'Apple Music Embeddable Web Player Widget'
-github: ''
-external: 'https://tools.applemusic.com/en-us'
+title: 'Tic-Tac-Toe'
+github: 'https://github.com/Shakib-ewu/Tic-tac-toe'
 tech:
-  - MusicKit.js
-  - JS
-  - SCSS
-company: 'Apple'
+  - JavaScript
+  - HTML
+  - CSS
 showInProjects: true
 ---
 
-Embeddable web player widget for Apple Music that lets users log in and listen to full song playback in the browser leveraging [MusicKit.js](https://developer.apple.com/documentation/musickitjs). Read more about this project on [9to5Mac](https://9to5mac.com/2018/06/03/apple-music-embeddable-web-player-listen-browser/).
+This is a simple Tic-Tac-Toe web game built with HTML, CSS, JavaScript, and jQuery. The project features a responsive game board, player turn management, win/tie detection, dynamic UI updates, and automatic game reset functionality. It demonstrates basic front-end development concepts such as DOM manipulation, event handling, and game logic implementation.

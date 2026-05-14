@@ -188,6 +188,12 @@ const GlobalStyle = createGlobalStyle`
     font-size: clamp(26px, 5vw, var(--fz-heading));
     white-space: nowrap;
 
+    /* ✅ CHANGED: mobile override — 24px size, allow wrapping */
+    @media (max-width: 768px) {
+      font-size: 24px;
+      //white-space: normal;
+    }
+
     &:before {
       position: relative;
       bottom: 4px;

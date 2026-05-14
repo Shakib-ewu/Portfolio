@@ -1,26 +1,23 @@
 module.exports = {
-  email: 'brittany.chiang@gmail.com',
+  email: 'imam.ewu@gmail.com',
 
   socialMedia: [
     {
       name: 'GitHub',
-      url: 'https://github.com/bchiang7',
+      url: 'https://github.com/Shakib-ewu',
     },
     {
       name: 'Instagram',
-      url: 'https://www.instagram.com/bchiang7',
+      url: 'https://www.instagram.com/shakib_ewu',
     },
-    {
-      name: 'Twitter',
-      url: 'https://twitter.com/bchiang7',
-    },
+
     {
       name: 'Linkedin',
-      url: 'https://www.linkedin.com/in/bchiang7',
+      url: 'https://www.linkedin.com/in/sakib-sarkar',
     },
     {
-      name: 'Codepen',
-      url: 'https://codepen.io/bchiang7',
+      name: 'Facebook',
+      url: 'https://www.facebook.com/imam.sakib75',
     },
   ],
 
@@ -34,7 +31,19 @@ module.exports = {
       url: '/#jobs',
     },
     {
-      name: 'Work',
+      name: 'Skills',
+      url: '/#skills',
+    },
+    {
+      name: 'Publications',
+      url: '/#publications',
+    },
+    {
+      name: 'Awards',
+      url: '/#awards',
+    },
+    {
+      name: 'Projects',
       url: '/#projects',
     },
     {
